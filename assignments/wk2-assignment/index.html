@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='ShoppingListCheckOff'>
+  <head>
+    <title>Shopping List Check Off</title>
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    .error {
+      font-weight: bold;
+      color: red;
+      font-size: 1.2em;
+      }
+      li {
+        margin-bottom: 7px;
+        font-size: 1.2em;
+      }
+      li > button {
+        margin-left: 6px;
+
+      }
+      </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Shopping List Check Off</h1>
+        <div class="row">
+          <!--To Buy List  -->
+          <div class="col-md-6" ng-controller='ToBuyShoppingController as buyItems'>
+              <h2>To buy</h2>
+               <ul>
+                 <li ng-repeat= "item in buyItems.getItems()">
+                   {{ item.quantity }} of {{ item.name }}
+                   <button ng-click="buyItems.removeItem($index)"> BUY </button>
+                 </li>
+               </ul>
+               <div ng-if="buyItems.allItemsBoughtMessage" class="error">
+                 {{ buyItems.allItemsBoughtMessage }}</div>
+          </div>
+          <!-- Already bought list -->
+          <div class="col-md-6" ng-controller='AlreadyBoughtShoppingController as boughtItems'>
+              <h2>Already Bought</h2>
+              <ul>
+                <li ng-repeat="item in boughtItems.getBoughtItems()">
+                  Bought {{ item.quantity }} {{ item.name }}
+                </li>
+              </ul>
+              <div ng-if="boughtItems.noItemsBought" class= "error">{{ boughtItems.noItemsBought }}</div>
+          </div>
+        </div>
+    </div>
+
+  </body>
+</html>
